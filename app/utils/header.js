@@ -20,13 +20,21 @@ function extractHeaders(string){
   return headers
 }
 
+function extractBody(string){
+  const indexOfHeaderEnd = string.indexOf("\r\n\r\n")
+  return string.substring(indexOfHeaderEnd + 4)
+}
+
 function extractRequestLineInfos(requestLine) {
   const [method, target, httpVersion] = requestLine.split(' ')
   return {method, target, httpVersion}
 }
 
+
+
 module.exports = {
   extractRequestLine,
   extractRequestLineInfos,
-  extractHeaders
+  extractHeaders,
+  extractBody
 }
