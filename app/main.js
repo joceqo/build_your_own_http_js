@@ -18,7 +18,7 @@ const server = net.createServer((socket) => {
 		if (target === "/") {
 			socket.end("HTTP/1.1 200 OK\r\n\r\n");
 		} else {
-			if (target.startWith("/echo/")) {
+			if (target.startsWith("/echo/")) {
 				const text = target.split("/").at(-1);
 				socket.end(`HTTP/1.1 200 OK\r\n\r\n${text}`);
 			} else {
