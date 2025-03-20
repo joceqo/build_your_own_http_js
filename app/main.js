@@ -20,7 +20,7 @@ const server = net.createServer((socket) => {
 		} else {
 			if (target.startsWith("/echo/")) {
 				const text = target.split("/").at(-1);
-				socket.end(`HTTP/1.1 200 OK\r\n\r\n${text}`);
+				socket.end(`HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${text.length}\r\n\r\${text}`);
 			} else {
 				socket.end("HTTP/1.1 404 Not Found\r\n\r\n");
 			}
