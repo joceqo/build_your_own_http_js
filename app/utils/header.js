@@ -13,7 +13,7 @@ function extractHeaders(string){
   for(headerline of headersLines){
     const headerSeparatorIndex = headerline.indexOf(':')
     const headerKey = headerline.substring(0, headerSeparatorIndex)
-    const headerValue = headerline.substring(headerSeparatorIndex+1)
+    const headerValue = headerline.substring(headerSeparatorIndex+1).trim()
     headers[headerKey] = headerValue
   }
 
