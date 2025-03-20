@@ -15,12 +15,16 @@ const server = net.createServer((socket) => {
 	socket.on("data", (data) => {
 		const requestLine = extractRequestParts(data.toString());
 		const { target } = extractRequestLineInfos(requestLine);
-    if(target === '/'){
-      socket.end("HTTP/1.1 200 OK\r\n\r\n");
-    }else{
-      socket.end("HTTP/1.1 404 Not Found\r\n\r\n")
-    }
-		
+		if (target === "/") {
+			socket.end("HTTP/1.1 200 OK\r\n\r\n");
+		} else {
+			if (target.startWith("/echo/")) {
+				const text = target.split("/").at(-1);
+				socket.end(`HTTP/1.1 200 OK\r\n\r\n${text}`);
+			} else {
+				socket.end("HTTP/1.1 404 Not Found\r\n\r\n");
+			}
+		}
 	});
 });
 
